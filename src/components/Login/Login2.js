@@ -11,34 +11,20 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  useEffect(() => {
-    console.log("effect is running"); //everytime is running when a state is updated
-  });
-
-  useEffect(() => {
-    console.log("effect is running for the first time"); //only for the first load is running
-  }, []);
-
-  useEffect(() => {
-    const identifier = setTimeout(() => {
-      console.log("validation checked"); //running when the dependencies were changed
-      setFormIsValid(
-        enteredEmail.includes("@") && enteredPassword.trim().length > 6
-      );
-    }, 500);
-
-    return () => {
-      console.log("clean-up");
-      clearTimeout(identifier);
-    }; //clean-up function will run first except for the first load (then the all component will run)
-  }, [enteredEmail, enteredPassword]); // as a dependencies you have to use what was used in the sideeffect function!!!!!!!!!!!!!!!!!!!!!
-
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
+    console.log("akarmi");
+    setFormIsValid(
+      event.target.value.includes("@") && enteredPassword.trim().length > 6
+    );
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
+
+    setFormIsValid(
+      event.target.value.trim().length > 6 && enteredEmail.includes("@")
+    );
   };
 
   const validateEmailHandler = () => {
@@ -56,6 +42,7 @@ const Login = (props) => {
 
   return (
     <Card className={classes.login}>
+      <h2>With useReducer</h2>
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${

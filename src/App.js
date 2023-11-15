@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import Login from "./components/Login/Login";
+import Login2 from "./components/Login/Login2";
 import Home from "./components/Home/Home";
 import MainHeader from "./components/MainHeader/MainHeader";
+import Counter from "./components/Counter";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,7 +26,7 @@ function App() {
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
   };
 
@@ -34,6 +36,8 @@ function App() {
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
+        <Counter />
+        <Login2 />
       </main>
     </React.Fragment>
   );
