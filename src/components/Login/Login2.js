@@ -4,7 +4,7 @@ import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 
-const emailReducer = (state, action) => {
+const emailReducer = (prevState, action) => {
   if (action.type === "User_Input") {
     return {
       value: action.val, //this is the payLoad from dispatchEmail
@@ -14,8 +14,8 @@ const emailReducer = (state, action) => {
 
   if (action.type === "Input_Blur") {
     return {
-      value: state.value,
-      isValid: state.value.includes("@"),
+      value: prevState.value,
+      isValid: prevState.value.includes("@"),
     };
   }
   return {
@@ -24,7 +24,7 @@ const emailReducer = (state, action) => {
   };
 };
 
-const passwordReducer = (state, action) => {
+const passwordReducer = (prevState, action) => {
   if (action.type === "User_Input") {
     return {
       value: action.val,
@@ -34,8 +34,8 @@ const passwordReducer = (state, action) => {
 
   if (action.type === "Input_Blur") {
     return {
-      value: state.value,
-      isValid: state.value.trim().length > 6,
+      value: prevState.value,
+      isValid: prevState.value.trim().length > 6,
     };
   }
 };
@@ -45,6 +45,8 @@ const Login = (props) => {
     value: "",
     isValid: null,
   });
+
+  // dispacth updateli az emailstatet egy action altal
 
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
     value: "",
