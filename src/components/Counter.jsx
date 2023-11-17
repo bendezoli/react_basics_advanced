@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 const counterReducer = (prevState, action) => {
-  console.log(prevState.counter);
+  console.log(prevState);
   if (action.type === "increment") {
     return {
       counter: prevState.counter + 1,
@@ -13,6 +13,7 @@ const counterReducer = (prevState, action) => {
     };
   }
 };
+
 const Counter = () => {
   const [counterState, dispacthCounter] = useReducer(counterReducer, {
     counter: 0,
